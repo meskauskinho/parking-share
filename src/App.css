@@ -1,0 +1,28 @@
+.App {
+  text-align: center;
+}
+
+.Container {
+  padding-top: 80px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.ContainerContent {
+  max-width: 600px;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.ContainerBody {
+  min-height: 400px;
+}
+
+body {
+  background-image: url('parking-deck.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-attachment: fixed;
+}
