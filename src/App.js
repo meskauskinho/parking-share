@@ -1,11 +1,40 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 import { Nav, Navbar, NavItem, NavDropdown, MenuItem, Button, Image, Panel, Form, FormGroup, Col, Checkbox, ControlLabel, FormControl } from 'react-bootstrap';
 
+import 'moment/min/locales.min.js';
+import moment from 'moment';
+
+import DateRangePicker from 'react-bootstrap-daterangepicker';
+// you will also need the css that comes with bootstrap-daterangepicker
+import 'bootstrap-daterangepicker/daterangepicker.css';
+
+const smallDevice = window.matchMedia('(max-width: 679px)').matches;
+var locale = window.navigator.userLanguage || window.navigator.language || 'en-GB';
+
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      startDate: null,
+      endDate: null,
+    };
+    this.handleSelect = this.handleSelect.bind(this);
+  }
+
+  handleSelect(event, picker){
+    console.log(picker);
+    this.setState({ startDate: picker.startDate.format('LLL') });
+    this.setState({ endDate: picker.endDate.format('LLL') });
+    // An object with two keys,
+    // 'startDate' and 'endDate' which are Momentjs objects.
+  }
+
   render() {
+    moment.locale(locale);console.log(moment.locale());
     return (
       <div className="App">
         <Navbar collapseOnSelect fixedTop inverse>
@@ -44,17 +73,11 @@ class App extends Component {
                 <div className="ContainerBody">
                   <Form horizontal>
                     <FormGroup controlId="formHorizontalEmail">
-                      <Col componentClass={ControlLabel} sm={2}>
-                        Email
-                      </Col>
                       <Col sm={10}>
                         <FormControl type="email" placeholder="Email" />
                       </Col>
                     </FormGroup>
                     <FormGroup controlId="formHorizontalPassword">
-                      <Col componentClass={ControlLabel} sm={2}>
-                        Password
-                      </Col>
                       <Col sm={10}>
                         <FormControl type="password" placeholder="Password" />
                       </Col>
@@ -65,6 +88,12 @@ class App extends Component {
                       </Col>
                     </FormGroup>
                   </Form>
+
+                  <DateRangePicker autoApply={true} minDate={moment()} onApply={this.handleSelect}>
+                    <div>
+                      {this.state.startDate} - {this.state.endDate}
+                    </div>
+                  </DateRangePicker>
                 </div>
               </Panel.Body>
             </Panel>
