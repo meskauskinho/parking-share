@@ -12,7 +12,7 @@ import DateRangePicker from 'react-bootstrap-daterangepicker';
 // you will also need the css that comes with bootstrap-daterangepicker
 import 'bootstrap-daterangepicker/daterangepicker.css';
 
-const smallDevice = window.matchMedia('(max-width: 679px)').matches;
+const smallDevice = window.matchMedia('(max-width: 768px)').matches;
 var locale = window.navigator.userLanguage || window.navigator.language || 'en-GB';
 
 class App extends Component {
@@ -34,31 +34,28 @@ class App extends Component {
   }
 
   render() {
-    moment.locale(locale);console.log(moment.locale());
+    moment.locale(locale);
     return (
       <div className="App">
-        <Navbar collapseOnSelect fixedTop inverse>
+        <Navbar collapseOnSelect fixedTop>
           <Navbar.Header>
             <Navbar.Brand>
-              <a href="#brand">React-Bootstrap</a>
+              Ruptela Parking
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav>
               <NavItem eventKey={1} href="#">
-                Link
+                Main
               </NavItem>
               <NavItem eventKey={2} href="#">
-                Link
+                Report improper parking
               </NavItem>
             </Nav>
             <Nav pullRight>
               <NavItem eventKey={1} href="#">
-                Link Right
-              </NavItem>
-              <NavItem eventKey={2} href="#">
-                Link Right
+                Logout
               </NavItem>
             </Nav>
           </Navbar.Collapse>
@@ -73,26 +70,26 @@ class App extends Component {
                 <div className="ContainerBody">
                   <Form horizontal>
                     <FormGroup controlId="formHorizontalEmail">
-                      <Col sm={10}>
+
                         <FormControl type="email" placeholder="Email" />
-                      </Col>
+
                     </FormGroup>
                     <FormGroup controlId="formHorizontalPassword">
-                      <Col sm={10}>
+
                         <FormControl type="password" placeholder="Password" />
-                      </Col>
+
                     </FormGroup>
                     <FormGroup>
-                      <Col smOffset={2} sm={10}>
+
                         <Button bsStyle="primary" type="submit">Sign in</Button>
-                      </Col>
+
                     </FormGroup>
                   </Form>
 
-                  <DateRangePicker autoApply={true} minDate={moment()} onApply={this.handleSelect}>
-                    <div>
-                      {this.state.startDate} - {this.state.endDate}
-                    </div>
+                  <DateRangePicker minDate={moment()} buttonClasses={smallDevice ? 'btn btn-lg' : 'btn btn-sm'} onApply={this.handleSelect} applyClass="btn-primary" opens="center" containerClass="Datepicker">
+                    <Button bsStyle="info">
+                      Share my parking space
+                    </Button>
                   </DateRangePicker>
                 </div>
               </Panel.Body>
