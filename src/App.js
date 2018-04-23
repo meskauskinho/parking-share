@@ -3,7 +3,9 @@ import _ from 'lodash';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Nav, Navbar, NavItem, NavDropdown, MenuItem, Button, Image, Panel, Form, FormGroup, Col, Checkbox, ControlLabel, FormControl } from 'react-bootstrap';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import 'moment/min/locales.min.js';
 import moment from 'moment';
@@ -37,6 +39,7 @@ class App extends Component {
     moment.locale(locale);
     return (
       <div className="App">
+          <MuiThemeProvider>
         <Navbar collapseOnSelect fixedTop>
           <Navbar.Header>
             <Navbar.Brand>
@@ -86,16 +89,23 @@ class App extends Component {
                     </FormGroup>
                   </Form>
 
-                  <DateRangePicker minDate={moment()} buttonClasses={smallDevice ? 'btn btn-lg' : 'btn btn-sm'} onApply={this.handleSelect} applyClass="btn-primary" opens="center" containerClass="Datepicker">
+                  <DateRangePicker
+                      minDate={moment()}
+                      buttonClasses={smallDevice ? ['btn btn-lg'] : ['btn btn-sm']}
+                      onApply={this.handleSelect}
+                      applyClass="btn-primary"
+                      opens="center"
+                      containerClass="Datepicker">
                     <Button bsStyle="info">
                       Share my parking space
                     </Button>
                   </DateRangePicker>
+                    <RaisedButton label="Default" />
                 </div>
               </Panel.Body>
             </Panel>
           </div>
-        </div>
+        </div></MuiThemeProvider>
       </div>
     );
   }
