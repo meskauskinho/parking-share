@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import _ from 'lodash';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -6,6 +7,9 @@ import 'bootstrap/dist/css/bootstrap-theme.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Nav, Navbar, NavItem, NavDropdown, MenuItem, Button, Image, Panel, Form, FormGroup, Col, Checkbox, ControlLabel, FormControl } from 'react-bootstrap';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
+import $ from 'jquery';
 
 import 'moment/min/locales.min.js';
 import moment from 'moment';
@@ -27,6 +31,10 @@ class App extends Component {
     this.handleSelect = this.handleSelect.bind(this);
   }
 
+  componentDidMount() {
+    this.replaceCalendarButtons();
+  }
+
   handleSelect(event, picker){
     console.log(picker);
     this.setState({ startDate: picker.startDate.format('LLL') });
@@ -35,11 +43,55 @@ class App extends Component {
     // 'startDate' and 'endDate' which are Momentjs objects.
   }
 
+  replaceCalendarButtons() {
+    const inputContainer = document.getElementsByClassName('range_inputs')[0];
+    const existedNewInputContainer = document.getElementById('new_range_inputs');
+    const newInputContainer = existedNewInputContainer || document.createElement('div');
+    const applyButton = inputContainer.children[0];
+    const cancelButton = inputContainer.children[1];
+    const newApplyButton = <FlatButton
+      label="Apply"
+      disabled={this.state.disabledApply}
+      primary={true}
+      onClick={() => applyButton.click()}/>;
+    const newCancelButton = <FlatButton label="Cancel" onClick={() => cancelButton.click()}/>;
+    newInputContainer.id = 'new_range_inputs';
+    applyButton.style.display = 'none';
+    cancelButton.style.display = 'none';
+    inputContainer.appendChild(newInputContainer);
+    this.setState({ disabledApply: applyButton.disabled });
+    ReactDOM.render(
+      <div>
+        <MuiThemeProvider>{newApplyButton}</MuiThemeProvider>
+        <MuiThemeProvider>{newCancelButton}</MuiThemeProvider>
+      </div>,
+      newInputContainer
+    );
+    setInterval(() => {
+      const isDisabled = this.state.disabledApply;
+      if (isDisabled !== applyButton.disabled) {
+        this.setState({ disabledApply: applyButton.disabled });
+        ReactDOM.render(
+          <div>
+            <MuiThemeProvider>
+              <FlatButton
+                label="Apply"
+                disabled={this.state.disabledApply}
+                primary={true}
+                onClick={() => applyButton.click()}/>
+            </MuiThemeProvider>
+            <MuiThemeProvider>{newCancelButton}</MuiThemeProvider>
+          </div>,
+          newInputContainer
+        );
+      }
+    }, 200);
+  }
+
   render() {
     moment.locale(locale);
     return (
       <div className="App">
-          <MuiThemeProvider>
         <Navbar collapseOnSelect fixedTop>
           <Navbar.Header>
             <Navbar.Brand>
@@ -73,39 +125,47 @@ class App extends Component {
                 <div className="ContainerBody">
                   <Form horizontal>
                     <FormGroup controlId="formHorizontalEmail">
-
-                        <FormControl type="email" placeholder="Email" />
-
+                      <MuiThemeProvider>
+                        <TextField
+                          hintText=""
+                          floatingLabelText="Email"
+                          onChange={(event, value) => this.setState({ mail: value })}
+                        />
+                      </MuiThemeProvider>
                     </FormGroup>
                     <FormGroup controlId="formHorizontalPassword">
-
-                        <FormControl type="password" placeholder="Password" />
-
+                      <MuiThemeProvider>
+                        <TextField
+                          hintText=""
+                          floatingLabelText="Password"
+                          type="password"
+                          onChange={(event, value) => this.setState({ password: value })}
+                        />
+                      </MuiThemeProvider>
                     </FormGroup>
                     <FormGroup>
-
-                        <Button bsStyle="primary" type="submit">Sign in</Button>
-
+                      <br/>
+                      <br/>
+                      <MuiThemeProvider>
+                        <RaisedButton onClick={() => console.log(this.state.mail, this.state.password)} label="Sign in" primary={true}/>
+                      </MuiThemeProvider>
                     </FormGroup>
                   </Form>
 
                   <DateRangePicker
                       minDate={moment()}
-                      buttonClasses={smallDevice ? ['btn btn-lg'] : ['btn btn-sm']}
                       onApply={this.handleSelect}
-                      applyClass="btn-primary"
                       opens="center"
                       containerClass="Datepicker">
-                    <Button bsStyle="info">
-                      Share my parking space
-                    </Button>
+                    <MuiThemeProvider>
+                      <RaisedButton label="Share my parking space" primary={true}/>
+                    </MuiThemeProvider>
                   </DateRangePicker>
-                    <RaisedButton label="Default" />
                 </div>
               </Panel.Body>
             </Panel>
           </div>
-        </div></MuiThemeProvider>
+        </div>
       </div>
     );
   }
