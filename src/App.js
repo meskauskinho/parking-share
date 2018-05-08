@@ -170,6 +170,7 @@ class App extends Component {
                       minDate={moment()}
                       onApply={this.handleSelect}
                       opens="center"
+                      onShow={() => window.scrollTo(0, 0)}
                       containerClass="Datepicker">
                     <MuiThemeProvider>
                       <RaisedButton label="Share my parking space" primary={true}/>
