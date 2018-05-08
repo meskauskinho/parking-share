@@ -16,7 +16,7 @@
 }
 
 .ContainerBody {
-  min-height: 400px;
+  padding: 20px 0 60px;
 }
 
 @media screen and (max-width: 768px) {
@@ -65,11 +65,6 @@
   }
 }
 
-.daterangepicker {
-  //position: fixed!important;
-  //top: auto!important;
-}
-
 .daterangepicker:before {
   content: 'Parking space will be shared for the selected time period'!important;
   display: flex!important;
@@ -81,10 +76,17 @@
   top: 0!important;
 }
 
+html {
+  //min-height: 100%;
+}
+
 body {
-  background-image: url('parking-deck.jpg');
+  background-image: url('parking-deck2.jpg');
   background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-repeat: no-repeat;
-  background-position: bottom center;
+  background-position: center center;
   background-attachment: fixed;
 }

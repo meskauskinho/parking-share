@@ -9,7 +9,13 @@ import { Nav, Navbar, NavItem, NavDropdown, MenuItem, Button, Image, Panel, Form
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
-import $ from 'jquery';
+import Paper from 'material-ui/Paper';
+import Avatar from 'material-ui/Avatar';
+
+import {
+  fullWhite,
+  green400,
+} from 'material-ui/styles/colors';
 
 import 'moment/min/locales.min.js';
 import moment from 'moment';
@@ -62,8 +68,8 @@ class App extends Component {
     this.setState({ disabledApply: applyButton.disabled });
     ReactDOM.render(
       <div>
-        <MuiThemeProvider>{newApplyButton}</MuiThemeProvider>
         <MuiThemeProvider>{newCancelButton}</MuiThemeProvider>
+        <MuiThemeProvider>{newApplyButton}</MuiThemeProvider>
       </div>,
       newInputContainer
     );
@@ -117,11 +123,19 @@ class App extends Component {
         </Navbar>
         <div className="Container">
           <div className="ContainerContent">
-            <Panel bsStyle="info">
-              <Panel.Heading>
-                <Panel.Title componentClass="h3">Panel heading with a title</Panel.Title>
-              </Panel.Heading>
-              <Panel.Body>
+            <MuiThemeProvider>
+              <Paper style={{ 'background-color': 'rgba(3, 73, 153, .2)', 'border-radius': '2px 2px 0 0', 'height': '90px', display: 'flex', 'align-items': 'flex-end' }} zDepth={3}>
+                <span style={{
+                  'background-color': 'rgba(3, 73, 153, 1)',
+                  'color': 'white',
+                  'padding': '4px 40px 0 20px',
+                  'font-size': '25px',
+                }}>Ruptela Parking</span>
+              </Paper>
+            </MuiThemeProvider>
+            <MuiThemeProvider>
+            <Paper style={{ 'background-color': 'rgba(255, 255, 255, .9)', 'border-radius': '0 0 2px 2px' }} zDepth={3}>
+
                 <div className="ContainerBody">
                   <Form horizontal>
                     <FormGroup controlId="formHorizontalEmail">
@@ -162,9 +176,140 @@ class App extends Component {
                     </MuiThemeProvider>
                   </DateRangePicker>
                 </div>
-              </Panel.Body>
-            </Panel>
+          </Paper>
+            </MuiThemeProvider>
           </div>
+        </div>
+        <div>
+        <MuiThemeProvider>
+
+
+
+          <span>
+            <div style={{margin: '10px', display: 'inline-block'}}>
+              <Paper style={{ 'background-color': 'rgba(0, 0, 0, .5)', 'border-radius': '2px 2px 0 0', width: 150, 'height': '40px'}} zDepth={1}>
+                <div style={{display: 'flex', 'justify-content': 'space-between', 'padding': '0 10px'}}>
+                    <div style={{color: 'white',     display: 'flex',
+                      'flex-direction': 'column',
+                      'align-items': 'baseline'}}>
+                  <div>
+                    2018-01-01
+                  </div>
+                      <div>
+                    Level -2
+                  </div>
+                </div>
+              <Avatar
+                color={fullWhite}
+                backgroundColor={green400}
+                size={48}
+                style={{'margin-top': 3}}
+              >
+          183
+        </Avatar>
+                </div>
+            </Paper>
+              <Paper style={{width: 150, height: 116, 'border-radius': '0 0 2px 2px', padding: '0 10px'}} zDepth={1}>
+                <FlatButton label="Details" onClick={() => console.log(1)} style={{margin: '15px 0 10px'}}/>
+                <FlatButton label="Book now" onClick={() => console.log(2)} primary={true}/>
+              </Paper>
+            </div>
+          </span>
+
+          <span>
+            <div style={{margin: '10px', display: 'inline-block'}}>
+              <Paper style={{ 'background-color': 'rgba(0, 0, 0, .5)', 'border-radius': '2px 2px 0 0', width: 150, 'height': '40px'}} zDepth={1}>
+                <div style={{display: 'flex', 'justify-content': 'space-between', 'padding': '0 10px'}}>
+                    <div style={{color: 'white',     display: 'flex',
+                      'flex-direction': 'column',
+                      'align-items': 'baseline'}}>
+                  <div>
+                    2018-01-01
+                  </div>
+                      <div>
+                    Level -2
+                  </div>
+                </div>
+              <Avatar
+                color={fullWhite}
+                backgroundColor={green400}
+                size={48}
+                style={{'margin-top': 3}}
+              >
+          183
+        </Avatar>
+                </div>
+            </Paper>
+              <Paper style={{width: 150, height: 116, 'border-radius': '0 0 2px 2px', padding: '0 10px'}} zDepth={1}>
+                <FlatButton label="Details" onClick={() => console.log(1)} style={{margin: '15px 0 10px'}}/>
+                <FlatButton label="Book now" onClick={() => console.log(2)} primary={true}/>
+              </Paper>
+            </div>
+          </span>
+
+          <span>
+            <div style={{margin: '10px', display: 'inline-block'}}>
+              <Paper style={{ 'background-color': 'rgba(0, 0, 0, .5)', 'border-radius': '2px 2px 0 0', width: 150, 'height': '40px'}} zDepth={1}>
+                <div style={{display: 'flex', 'justify-content': 'space-between', 'padding': '0 10px'}}>
+                    <div style={{color: 'white',     display: 'flex',
+                      'flex-direction': 'column',
+                      'align-items': 'baseline'}}>
+                  <div>
+                    2018-01-01
+                  </div>
+                      <div>
+                    Level -2
+                  </div>
+                </div>
+              <Avatar
+                color={fullWhite}
+                backgroundColor={green400}
+                size={48}
+                style={{'margin-top': 3}}
+              >
+          106
+        </Avatar>
+                </div>
+            </Paper>
+              <Paper style={{width: 150, height: 116, 'border-radius': '0 0 2px 2px', padding: '0 10px'}} zDepth={1}>
+                <FlatButton label="Details" onClick={() => console.log(1)} style={{margin: '15px 0 10px'}}/>
+                <FlatButton label="Book now" onClick={() => console.log(2)} primary={true}/>
+              </Paper>
+            </div>
+          </span>
+
+          <span>
+            <div style={{margin: '10px', display: 'inline-block'}}>
+              <Paper style={{ 'background-color': 'rgba(0, 0, 0, .5)', 'border-radius': '2px 2px 0 0', width: 150, 'height': '40px'}} zDepth={1}>
+                <div style={{display: 'flex', 'justify-content': 'space-between', 'padding': '0 10px'}}>
+                    <div style={{color: 'white',     display: 'flex',
+                      'flex-direction': 'column',
+                      'align-items': 'baseline'}}>
+                  <div>
+                    2018-01-01
+                  </div>
+                      <div>
+                    Level -2
+                  </div>
+                </div>
+              <Avatar
+                color={fullWhite}
+                backgroundColor={green400}
+                size={48}
+                style={{'margin-top': 3}}
+              >
+          89
+        </Avatar>
+                </div>
+            </Paper>
+              <Paper style={{width: 150, height: 116, 'border-radius': '0 0 2px 2px', padding: '0 10px'}} zDepth={1}>
+                <FlatButton label="Details" onClick={() => console.log(1)} style={{margin: '15px 0 10px'}}/>
+                <FlatButton label="Book now" onClick={() => console.log(2)} primary={true}/>
+              </Paper>
+            </div>
+          </span>
+
+        </MuiThemeProvider>
         </div>
       </div>
     );
