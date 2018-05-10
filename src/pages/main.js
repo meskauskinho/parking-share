@@ -90,7 +90,8 @@ export default class MainPage extends Component {
                 'background-color': 'rgba(0, 0, 0, .5)',
                 'border-radius': '2px 2px 0 0',
                 width: 320,
-                'height': '40px'
+                'height': '40px',
+                margin: 'auto'
               }} zDepth={1}>
                 <div style={{display: 'flex', 'justify-content': 'space-between', 'padding': '0 10px'}}>
                   <div style={{
@@ -115,7 +116,7 @@ export default class MainPage extends Component {
                   </Avatar>
                 </div>
               </Paper>
-              <Paper style={{width: 320, height: 80, 'border-radius': '0 0 2px 2px', padding: '0 10px'}} zDepth={1}>
+              <Paper style={{width: '100%', height: 'auto', 'border-radius': '0 0 2px 2px', padding: '0 10px'}} zDepth={1}>
                 <DateRangePicker
                   minDate={moment()}
                   onApply={this.handleSelect}
@@ -124,15 +125,15 @@ export default class MainPage extends Component {
                   containerClass="Datepicker">
                   <RaisedButton label="Share my parking space" primary={true} style={{ margin: 25 }}/>
                 </DateRangePicker>
+                <div style={{ display: 'flex', backgroundColor: 'white', padding: '5px 20px', alignItems: 'center'}}>
+                  <span style={{ paddingLeft: 20}}>Periods of sharing your parking space:</span>
+                </div>
+                <div style={{ paddingTop: 10}}>
+                  <ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/>
+                </div>
               </Paper>
             </div>
           </MuiThemeProvider>
-        </div>
-        <div style={{ display: 'flex', backgroundColor: 'white', padding: '5px 20px', marginTop: 40, alignItems: 'center'}}>
-          <span style={{ paddingLeft: 20}}>Periods of sharing your parking space</span>
-        </div>
-        <div style={{ paddingTop: 10, backgroundColor: 'rgba(255,255,255,.6)'}}>
-          <ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/>
         </div>
       </div>
     );
