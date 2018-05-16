@@ -82,60 +82,56 @@ export default class MainPage extends Component {
 
   render() {
     return (
+      <MuiThemeProvider>
       <div>
-        <div className="Container">
-          <MuiThemeProvider>
-            <div style={{margin: '10px', display: 'inline-block'}}>
-              <Paper style={{
-                'background-color': 'rgba(0, 0, 0, .5)',
-                'border-radius': '2px 2px 0 0',
-                width: 320,
-                'height': '40px',
-                margin: 'auto'
-              }} zDepth={1}>
-                <div style={{display: 'flex', 'justify-content': 'space-between', 'padding': '0 10px'}}>
-                  <div style={{
-                    color: 'white', display: 'flex',
-                    'flex-direction': 'column',
-                    'align-items': 'baseline'
-                  }}>
-                    <div>
-                      { localStorage.getItem('email') }
-                    </div>
-                    <div>
-                      Level -2
-                    </div>
-                  </div>
-                  <Avatar
-                    color={fullWhite}
-                    backgroundColor={green400}
-                    size={48}
-                    style={{'margin-top': 3}}
-                  >
-                    106
-                  </Avatar>
-                </div>
-              </Paper>
-              <Paper style={{width: '100%', height: 'auto', 'border-radius': '0 0 2px 2px', padding: '0 10px'}} zDepth={1}>
-                <DateRangePicker
-                  minDate={moment()}
-                  onApply={this.handleSelect}
-                  opens="center"
-                  onShow={() => window.scrollTo(0, 0)}
-                  containerClass="Datepicker">
-                  <RaisedButton label="Share my parking space" primary={true} style={{ margin: 25 }}/>
-                </DateRangePicker>
-                <div style={{ display: 'flex', backgroundColor: 'white', padding: '5px 20px', alignItems: 'center'}}>
-                  <span style={{ paddingLeft: 20}}>Periods of sharing your parking space:</span>
-                </div>
-                <div style={{ paddingTop: 10}}>
-                  <ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/>
-                </div>
-              </Paper>
+        <div className='subheader container'>
+          <span>
+            <div className='subheader-item'>
+              <div>
+                <div className='subheader-item-label'>Today 2018-02-19</div>
+                <div>Not shared</div>
+              </div>
             </div>
-          </MuiThemeProvider>
+          </span>
+          <span>
+            <div className='subheader-item'>
+              <div>
+                <div className='subheader-item-label'>Tomorrow 2018-02-20</div>
+                <div>Not shared</div>
+              </div>
+            </div>
+          </span>
+          <span>
+            <div className='subheader-item'>
+              <DateRangePicker
+                minDate={moment()}
+                onApply={this.handleSelect}
+                opens="center"
+                onShow={() => window.scrollTo(0, 0)}
+                containerClass="Datepicker">
+              <FlatButton label="Share my parking space" primary={true} style={{marginTop: 8, marginRight: 5}}/>
+            </DateRangePicker>
+            <Avatar
+              color={fullWhite}
+              backgroundColor={green400}
+              size={48}
+              style={{'margin-top': 3}}
+            >
+              106
+            </Avatar>
+          </div>
+          </span>
+        </div>
+        <div className="Container">
+
+            <div style={{margin: '10px', display: 'inline-block'}}>
+              <div style={{ paddingTop: 10}}>
+                <ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/>
+              </div>
+            </div>
         </div>
       </div>
+      </MuiThemeProvider>
     );
   }
 }
