@@ -37,6 +37,9 @@ export default class MainPage extends Component {
 
   replaceCalendarButtons() {
     const inputContainer = document.getElementsByClassName('range_inputs')[0];
+    if (!inputContainer) {
+      return;
+    }
     const existedNewInputContainer = document.getElementById('new_range_inputs');
     const newInputContainer = existedNewInputContainer || document.createElement('div');
     const applyButton = inputContainer.children[0];
@@ -97,7 +100,7 @@ export default class MainPage extends Component {
             <div className='subheader-item'>
               <div>
                 <div className='subheader-item-label'>Tomorrow 2018-02-20</div>
-                <div>Not shared</div>
+                <div>Shared</div>
               </div>
             </div>
           </span>
@@ -122,13 +125,30 @@ export default class MainPage extends Component {
           </div>
           </span>
         </div>
-        <div className="Container">
-
-            <div style={{margin: '10px', display: 'inline-block'}}>
-              <div style={{ paddingTop: 10}}>
-                <ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/>
+        <div className='subheader container'>
+          <span>
+            <div className='subheader-item'>
+              <div>
+                <div className='subheader-item-label'>Today 2018-02-19</div>
+                <div>Reserved 106</div>
               </div>
             </div>
+          </span>
+          <span>
+            <div className='subheader-item'>
+              <div>
+                <div className='subheader-item-label'>Tomorrow 2018-02-20</div>
+                <div>Not reserved</div>
+              </div>
+            </div>
+          </span>
+        </div>
+        <div className="Container">
+          <div style={{margin: '10px', display: 'inline-block'}}>
+            <div style={{ paddingTop: 10}}>
+              <ParkingLot booked={true}/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/>
+            </div>
+          </div>
         </div>
       </div>
       </MuiThemeProvider>
