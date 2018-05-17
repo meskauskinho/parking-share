@@ -1,24 +1,19 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { Switch, Route } from 'react-router-dom';
+import { HashRouter, Route } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
 import Login from './pages/login.js';
 import MainPage from './pages/main.js';
+import Report from './pages/report.js';
 
 import 'moment/min/locales.min.js';
 import moment from 'moment';
 
-import DateRangePicker from 'react-bootstrap-daterangepicker';
 // you will also need the css that comes with bootstrap-daterangepicker
 import 'bootstrap-daterangepicker/daterangepicker.css';
 
-const smallDevice = window.matchMedia('(max-width: 768px)').matches;
 var locale = window.navigator.userLanguage || window.navigator.language || 'en-GB';
 
 class App extends Component {
@@ -33,7 +28,7 @@ class App extends Component {
   render() {
     moment.locale(locale);
     return (
-      <main>
+      <HashRouter>
         <div className="App">
           {
             !window.location.href.match(/\login/) && (
@@ -46,15 +41,15 @@ class App extends Component {
                 </Navbar.Header>
                 <Navbar.Collapse>
                   <Nav>
-                    <NavItem eventKey={1} href="#">
+                    <NavItem eventKey={1} href="/#/">
                       Main
                     </NavItem>
-                    <NavItem eventKey={2} href="#">
+                    <NavItem eventKey={2} href="/#/report">
                       Report improper parking
                     </NavItem>
                   </Nav>
                   <Nav pullRight>
-                    <NavItem eventKey={1} href="#" onClick={() => { localStorage.removeItem('token');localStorage.removeItem('email');window.location.href = '/login'; }}>
+                    <NavItem eventKey={1} href="#" onClick={() => { localStorage.removeItem('token');localStorage.removeItem('email');window.location.href = '/#/login'; }}>
                       Logout
                     </NavItem>
                   </Nav>
@@ -62,14 +57,13 @@ class App extends Component {
               </Navbar>
             )
           }
-          <Switch>
-            <Route exact path='/'>
-              <MainPage/>
-            </Route>
-            <Route path='/login'><Login/></Route>
-          </Switch>
+            <div>
+              <Route exact path='/' component={MainPage} />
+              <Route path='/login' component={Login} />
+              <Route path='/report' component={Report} />
+            </div>
         </div>
-      </main>
+      </HashRouter>
     );
   }
 }

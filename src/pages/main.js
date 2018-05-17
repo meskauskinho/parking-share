@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { Form, FormGroup } from 'react-bootstrap';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
-import Paper from 'material-ui/Paper';
 import FlatButton from 'material-ui/FlatButton';
 import DateRangePicker from 'react-bootstrap-daterangepicker';
-import _ from "lodash";
 import moment from "moment/moment";
 import ReactDOM from "react-dom";
 import Avatar from 'material-ui/Avatar';
-import { fullWhite, green400 } from "material-ui/styles/colors";
+import { blue600, fullWhite } from "material-ui/styles/colors";
 import ParkingLot from '../components/parkingLot.js';
 
 export default class MainPage extends Component {
@@ -19,6 +13,7 @@ export default class MainPage extends Component {
     super(props);
     this.state = {
       disabledApply: false,
+      owner: true,
     };
     this.handleSelect = this.handleSelect.bind(this);
   }
@@ -83,11 +78,9 @@ export default class MainPage extends Component {
     }, 200);
   }
 
-  render() {
-    return (
-      <MuiThemeProvider>
-      <div>
-        <div className='subheader container'>
+  infoBar = () => {
+    if (this.state.owner) {
+      return <div className='subheader container'>
           <span>
             <div className='subheader-item'>
               <div>
@@ -96,7 +89,7 @@ export default class MainPage extends Component {
               </div>
             </div>
           </span>
-          <span>
+        <span>
             <div className='subheader-item'>
               <div>
                 <div className='subheader-item-label'>Tomorrow 2018-02-20</div>
@@ -104,7 +97,7 @@ export default class MainPage extends Component {
               </div>
             </div>
           </span>
-          <span>
+        <span>
             <div className='subheader-item'>
               <DateRangePicker
                 minDate={moment()}
@@ -116,16 +109,17 @@ export default class MainPage extends Component {
             </DateRangePicker>
             <Avatar
               color={fullWhite}
-              backgroundColor={green400}
+              backgroundColor={blue600}
               size={48}
-              style={{'margin-top': 3}}
+              style={{marginTop: 3}}
             >
               106
             </Avatar>
           </div>
           </span>
-        </div>
-        <div className='subheader container'>
+      </div>;
+    } else {
+      return <div className='subheader container'>
           <span>
             <div className='subheader-item'>
               <div>
@@ -134,7 +128,7 @@ export default class MainPage extends Component {
               </div>
             </div>
           </span>
-          <span>
+        <span>
             <div className='subheader-item'>
               <div>
                 <div className='subheader-item-label'>Tomorrow 2018-02-20</div>
@@ -142,11 +136,19 @@ export default class MainPage extends Component {
               </div>
             </div>
           </span>
-        </div>
+      </div>;
+    }
+  }
+
+  render() {
+    return (
+      <MuiThemeProvider>
+      <div>
+        {this.infoBar()}
         <div className="Container">
           <div style={{margin: '10px', display: 'inline-block'}}>
             <div style={{ paddingTop: 10}}>
-              <ParkingLot booked={true}/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/><ParkingLot/>
+              { this.state.owner ? <ParkingLot shared={true}/> : <ParkingLot booked={true}/>}
             </div>
           </div>
         </div>

@@ -5,7 +5,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
-import _ from "lodash";
+import _ from 'lodash';
+import $ from 'jquery';
 
 export default class Login extends Component {
   constructor(props) {
@@ -15,23 +16,29 @@ export default class Login extends Component {
       email: "",
       password: ""
     };
+    this.validateForm = this.validateForm.bind(this);
 
     if (!_.isNil(localStorage.getItem('token'))) {
-      window.location.replace('/');
+      window.location.href('/#/');
     }
+
+    const intervalId = setInterval(() => {
+      var autofilled = document.querySelectorAll('input:-webkit-autofill');
+      if (autofilled.length) {
+        this.refs.password.setState({...this.refs.password.state, hasValue: true});
+        this.refs.email.setState({...this.refs.email.state, hasValue: true});
+        clearInterval(intervalId);
+        this.setState({ autofill: true });
+      }
+    }, 200);
   }
 
   validateForm() {
-    return this.state.email.length > 0 && this.state.password.length > 0;
-  }
-
-  handleChange = event => {
-    this.setState({
-      [event.target.id]: event.target.value
-    });
+    return  this.state.autofill || (this.state.email.length > 0 && this.state.password.length > 0);
   }
 
   handleSubmit = event => {
+    event.preventDefault();
     axios.post('sessions', {
       username: this.state.email,
       password: this.state.password,
@@ -75,10 +82,11 @@ export default class Login extends Component {
             <Paper style={{'background-color': 'rgba(255, 255, 255, .9)', 'border-radius': '0 0 2px 2px'}} zDepth={3}>
 
               <div className="ContainerBody">
-                <Form horizontal>
+                <Form horizontal onSubmit={this.handleSubmit}>
                   <FormGroup controlId="formHorizontalEmail">
                     <MuiThemeProvider>
                       <TextField
+                        ref="email"
                         hintText=""
                         floatingLabelText="Email"
                         onChange={(event, value) => this.setState({email: value, error: false })}
@@ -88,6 +96,7 @@ export default class Login extends Component {
                   <FormGroup controlId="formHorizontalPassword">
                     <MuiThemeProvider>
                       <TextField
+                        ref="password"
                         hintText=""
                         floatingLabelText="Password"
                         type="password"
@@ -99,7 +108,7 @@ export default class Login extends Component {
                     <br/>
                     <br/>
                     <MuiThemeProvider>
-                      <RaisedButton onClick={this.handleSubmit} label="Sign in" disabled={!this.validateForm()}
+                      <RaisedButton onClick={this.handleSubmit} label="Sign in" disabled={!this.validateForm()} type="submit"
                                     primary={true}/>
                     </MuiThemeProvider>
                   </FormGroup>

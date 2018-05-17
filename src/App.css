@@ -87,16 +87,15 @@
   .range_inputs .btn {
     margin: 0 10px;
   }
-
-  .daterangepicker.dropdown-menu:before {
-    //display: inline!important;
-  }
 }
+
+input:-webkit-autofill {transition: background-color 5000s ease-in-out 0s;}
+
 
 @media screen and (min-width: 769px) {
   body {
-    background-position: center center;
-    background-size: 100% auto;
+    background-position: center center!important;
+    background-size: 100% auto!important;
   }
 }
 
@@ -116,4 +115,5 @@ body {
   background-size: 140% auto;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  background-position-x: right;
 }

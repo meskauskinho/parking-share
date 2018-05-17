@@ -7,7 +7,7 @@ import registerServiceWorker from './registerServiceWorker';
 import _ from "lodash";
 if (_.isNil(localStorage.getItem('token'))) {
   if (!window.location.href.match(/\login/)) {
-    window.location.href = '/login';
+    window.location.href = '/#/login';
   }
 }
 ReactDOM.render(<BrowserRouter><App /></BrowserRouter>, document.getElementById('root'));
