@@ -5,7 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
-import _ from 'lodash';
+import Snackbar from 'material-ui/Snackbar';
 
 export default class Report extends Component {
   constructor(props) {
@@ -13,7 +13,8 @@ export default class Report extends Component {
 
     this.state = {
       parkingSpace: "",
-      licencePlate: ""
+      licencePlate: "",
+      showMessage: false,
     };
     this.validateForm = this.validateForm.bind(this);
   }
@@ -29,11 +30,11 @@ export default class Report extends Component {
       licencePlate: this.state.licencePlate,
     })
       .then(res => {
-        console.log(1);
+        this.setState({showMessage: true});
       })
       .catch(
         () => {
-          console.log(2);
+          this.setState({showMessage: true});
         }
       );
   }
@@ -78,6 +79,16 @@ export default class Report extends Component {
             </Paper>
           </MuiThemeProvider>
         </div>
+        <Snackbar
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+          open={this.state.showMessage}
+          onClose={() => this.setState({showMessage: false})}
+          autoHideDuration={3000}
+          ContentProps={{
+            'aria-describedby': 'message-id',
+          }}
+          message={<span id="message-id">I love snacks</span>}
+        />
       </div>
     );
   }

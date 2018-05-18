@@ -6,6 +6,7 @@ import moment from "moment/moment";
 import ReactDOM from "react-dom";
 import Avatar from 'material-ui/Avatar';
 import { blue600, fullWhite } from "material-ui/styles/colors";
+import Snackbar from 'material-ui/Snackbar';
 import ParkingLot from '../components/parkingLot.js';
 
 export default class MainPage extends Component {
@@ -24,10 +25,9 @@ export default class MainPage extends Component {
 
   handleSelect(event, picker){
     console.log(picker);
-    this.setState({ startDate: picker.startDate.format('LLL') });
-    this.setState({ endDate: picker.endDate.format('LLL') });
-    // An object with two keys,
-    // 'startDate' and 'endDate' which are Momentjs objects.
+    this.setState({ startDate: picker.startDate.format('L') });
+    this.setState({ endDate: picker.endDate.format('L') });
+    this.setState({showMessage: true});
   }
 
   replaceCalendarButtons() {
@@ -52,8 +52,8 @@ export default class MainPage extends Component {
     this.setState({ disabledApply: applyButton.disabled });
     ReactDOM.render(
       <div>
-        <MuiThemeProvider>{newCancelButton}</MuiThemeProvider>
         <MuiThemeProvider>{newApplyButton}</MuiThemeProvider>
+        <MuiThemeProvider>{newCancelButton}</MuiThemeProvider>
       </div>,
       newInputContainer
     );
@@ -142,7 +142,6 @@ export default class MainPage extends Component {
 
   render() {
     return (
-      <MuiThemeProvider>
       <div>
         {this.infoBar()}
         <div className="Container">
@@ -152,8 +151,14 @@ export default class MainPage extends Component {
             </div>
           </div>
         </div>
+        <Snackbar
+          bodyStyle={{height: 'auto', padding: '14px', lineHeight: ''}}
+          open={this.state.showMessage}
+          onClose={() => this.setState({showMessage: false})}
+          autoHideDuration={6000}
+          message={<span>Shared parking space <span style={{whiteSpace: 'nowrap'}}>from {this.state.startDate} to {this.state.endDate}</span></span>}
+        />
       </div>
-      </MuiThemeProvider>
     );
   }
 }

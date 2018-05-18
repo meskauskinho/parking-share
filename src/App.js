@@ -7,6 +7,7 @@ import { Nav, Navbar, NavItem } from 'react-bootstrap';
 import Login from './pages/login.js';
 import MainPage from './pages/main.js';
 import Report from './pages/report.js';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import 'moment/min/locales.min.js';
 import moment from 'moment';
@@ -56,12 +57,13 @@ class App extends Component {
                 </Navbar.Collapse>
               </Navbar>
             )
-          }
+          }<MuiThemeProvider>
             <div>
               <Route exact path='/' component={MainPage} />
               <Route path='/login' component={Login} />
               <Route path='/report' component={Report} />
             </div>
+          </MuiThemeProvider>
         </div>
       </HashRouter>
     );
